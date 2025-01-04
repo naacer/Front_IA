@@ -1,0 +1,53 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #334a9e !important;
+    height: 60px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .salesforce-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .supervisor-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fffcfc;
+  }
+  
+ 
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fffbfb;
+    padding: 5px 10px;
+    border-radius: 30px;
+    width: 350px;
+  }
+  
+  .search-bar input {
+    border: none;
+    margin-left: 10px;
+    width: 100%;
+  }
+  
+.search-bar svg {
+    color: #888; /* Couleur de l'icône */
+    font-size: 20px; /* Taille de l'icône */
+  }
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+ 

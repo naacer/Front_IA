@@ -1,0 +1,24 @@
+.profile-card {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 10;
+  }
+  
+  .logout-button {
+    background-color: #184789;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #ff7875;
+  }
+  

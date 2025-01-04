@@ -1,0 +1,101 @@
+
+/* Structure de la page */
+.login-page {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+  }
+  
+  /* Image à gauche */
+  .login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .login-image {
+    background: url('../assets/agent.jpg') no-repeat center/cover;
+    height: 100%;
+  }
+  
+  /* Conteneur du formulaire */
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #eee6f1, #00a0e057);
+    backdrop-filter: blur(80px); /* Applique un effet de flou */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Pour un aspect moderne */
+  }
+  
+  .login-form-container-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.8); /* Couleur floue grâce à la transparence */
+    box-shadow: -2px 0 5px rgba(161, 42, 42, 0.1);
+    border-radius: 15px; /* Coins arrondis */
+    backdrop-filter: blur(80px); /* Applique un effet de flou */
+    transition: transform 0.5s, box-shadow 0.5s; /* Transition fluide pour les animations */
+  }
+  .login-form-container-1:hover {
+    transform: translateY(-10px); /* Effet flottant */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Ombre plus grande au survol */
+  }
+  
+  .login-form-container h1 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .login-form-container .login-form {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  .login-form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-form-container button {
+    width: 100%;
+    padding: 10px;
+    background: #1a67b9be;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login-form-container button:hover {
+    background: #03172c;
+  }
+  
+  /* Lien pour basculer */
+  .login-form-container a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #1565aab8;
+  }
+  
+  .login-form-container a:hover {
+    text-decoration: underline;
+  }
+  
