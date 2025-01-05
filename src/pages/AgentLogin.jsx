@@ -1,21 +1,23 @@
 // src/pages/AgentLogin.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import { login } from '../services/AuthService';
 import '../components/LoginForm.css';
  
 const AgentLogin = () => {
+  const navigate = useNavigate(); // Hook pour la navigation
+
   const handleAgentLogin = async (credentials) => {
     try {
-      const agent = await login(credentials,"Agents_db__c");
+      const agent = await login(credentials, "Agent_dashbord__c");
       console.log('Agent logged in:', agent);
-  
-      // Stockez les informations de l'agent dans le stockage local ou le contexte global
-      localStorage.setItem('agent', JSON.stringify(agent));
-  
-      // Redirigez vers la page dédiée à l'agent
-      window.location.href = `/agent-dashboard/${agent.Id}`;
+
+      // Stockez les informations du superviseur dans le stockage local
+      localStorage.setItem('Agent', JSON.stringify(agent));
+
+      // Redirigez vers la page SupervisorDashboard
+      navigate(`/Dashboard/${agent.Id}`);
     } catch (error) {
       alert('Email or password not found');
     }

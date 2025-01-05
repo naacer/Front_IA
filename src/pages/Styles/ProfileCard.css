@@ -1,24 +1,65 @@
 .profile-card {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 10;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #f9f9f9; /* Couleur légèrement différente pour un meilleur contraste */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus douce et réaliste */
+  padding: 20px;
+  border-radius: 10px; /* Coins légèrement plus arrondis */
+  z-index: 10;
+  width: 300px; /* Largeur fixe pour un rendu uniforme */
+  font-family: 'Arial', sans-serif; /* Police simple et propre */
+  border: 1px solid #e0e0e0; /* Ajout d'une bordure légère */
+}
+
+.profile-card h3 {
+  margin: 0 0 10px 0; /* Espacement pour le titre */
+  color: #184789; /* Couleur cohérente avec le bouton */
+  font-size: 1.2rem; /* Taille légèrement augmentée */
+}
+
+.profile-card p {
+  margin: 5px 0; /* Espacement entre les paragraphes */
+  color: #555; /* Couleur de texte secondaire */
+  font-size: 0.95rem;
+}
+
+.logout-button {
+  background-color: #184789; /* Couleur principale */
+  color: #ffffff; /* Texte blanc pour le contraste */
+  border: none;
+  padding: 10px 20px; /* Plus de padding pour un bouton plus grand */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem; /* Texte légèrement plus grand */
+  font-weight: bold; /* Texte en gras */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition pour l'interaction */
+}
+
+.logout-button:hover {
+  background-color: #1560bd; /* Teinte plus claire pour l'effet hover */
+  transform: scale(1.05); /* Légère augmentation de taille au survol */
+}
+
+.logout-button:active {
+  background-color: #003366; /* Teinte plus foncée pour l'effet clic */
+  transform: scale(0.95); /* Réduction pour l'effet clic */
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    width: 90%; /* Adaptation à des écrans plus petits */
+    top: 20px;
+    right: 5%;
+    padding: 15px;
   }
-  
+
+  .profile-card h3 {
+    font-size: 1rem; /* Taille réduite pour les petits écrans */
+  }
+
   .logout-button {
-    background-color: #184789;
-    color: #ffffff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 8px 15px;
   }
-  
-  .logout-button:hover {
-    background-color: #ff7875;
-  }
-  
+}
