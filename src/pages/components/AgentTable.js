@@ -118,7 +118,7 @@ const AgentTable = () => {
                 <TableCell>Email</TableCell>
                 <TableCell>Téléphone</TableCell>
                 <TableCell>Expérience</TableCell>
-                <TableCell>Tâches</TableCell>
+                {/* <TableCell>Tâches</TableCell> */}
                 <TableCell>Details</TableCell>
 
               </TableRow>
@@ -139,7 +139,7 @@ const AgentTable = () => {
                       {agent.experience.charAt(0).toUpperCase() + agent.experience.slice(1)}
                     </button>
                   </TableCell>
-                  <TableCell>{agent.tasks}</TableCell>
+                  {/* <TableCell>{agent.tasks}</TableCell> */}
                   <TableCell>
                     <Button
                       variant="outlined"
