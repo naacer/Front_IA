@@ -19,7 +19,7 @@ const ProfileCard = () => {
   return (
     <div className="profile-card">
       <h3>{supervisor.Name}</h3>
-      <p>Email: {supervisor.Email__c}</p>
+      <p>Email: {supervisor.Email_c__c}</p>
       <p>Role: Supervisor</p>
       <button
         className="logout-button"
