@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Paper, Button } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Paper, Button, Checkbox } from "@mui/material";
 import "../Styles/AgentTable.css";
 import AgentIcon from "../../assets/icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -14,12 +14,12 @@ const AgentTable = () => {
 
   useEffect(() => {
     const fetchAgents = async () => {
-      const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
-      const accessToken = "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
+      const instanceUrl = "https://nationalschoolofappliedsci3-dev-ed.develop.my.salesforce.com";
+      const accessToken = "00D8e000000Nlhu!ARMAQL9rVTwCRB1OBVm5fAvBkjh7o1IqcUwW8qTrXL3TNo9uxp9rx.eNppUNe1wVIvJ3qo.3cXzuJpGFt8yddqfWEhUug_.O";
 
       try {
         const response = await axios.get(
-          `${instanceUrl}/services/data/v55.0/query?q=SELECT+Id,Name,Email__c,Phone__c,Experience__c,Tasks__c,Images__c+FROM+Agent_dashbord__c`,
+          `${instanceUrl}/services/data/v55.0/query?q=SELECT+Id,Name,Email_c__c,Experience_Level__c,Available__c,image__c,Performance_Score__c,Skills__c+FROM+Agent_c__c`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -30,11 +30,12 @@ const AgentTable = () => {
         const transformedData = response.data.records.map((record) => ({
           id: record.Id,
           name: record.Name,
-          email: record.Email__c,
-          phone: record.Phone__c,
-          experience: record.Experience__c,
-          tasks: record.Tasks__c,
-          image: record.Images__c, // Image URL
+          email: record.Email_c__c,
+          experience: record.Experience_Level__c,
+          skills: record.Skills__c,
+          image: record.image__c,
+          available: record.Available__c,
+          performance: record.Performance_Score__c
         }));
 
         setAgents(transformedData);
@@ -73,7 +74,7 @@ const AgentTable = () => {
   const sortedAgents = sortData(filteredAgents);
 
   const getExperienceClass = (experience) => {
-    const normalizedExperience = experience.trim().toLowerCase(); // Supprime les espaces et passe en minuscule
+    const normalizedExperience = experience.trim().toLowerCase();
     switch (normalizedExperience) {
       case "junior":
         return "experience-junior";
@@ -86,10 +87,9 @@ const AgentTable = () => {
     }
   };
 
-  // Fonction pour obtenir l'ID de l'agent en utilisant son email
   const getAgentIdByEmail = (email) => {
     const agent = agents.find((agent) => agent.email === email);
-    return agent ? agent.id : null; // Retourne l'ID de l'agent ou null si non trouvé
+    return agent ? agent.id : null;
   };
 
   return (
@@ -114,13 +114,13 @@ const AgentTable = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Nom </TableCell>
+                <TableCell>Nom</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Téléphone</TableCell>
                 <TableCell>Expérience</TableCell>
-                {/* <TableCell>Tâches</TableCell> */}
+                <TableCell>Skills</TableCell>
+                <TableCell>Performance</TableCell>
+                <TableCell>Available</TableCell>
                 <TableCell>Details</TableCell>
-
               </TableRow>
             </TableHead>
             <TableBody>
@@ -133,27 +133,35 @@ const AgentTable = () => {
                     </div>
                   </TableCell>
                   <TableCell>{agent.email}</TableCell>
-                  <TableCell>{agent.phone}</TableCell>
                   <TableCell>
                     <button className={`experience-button ${getExperienceClass(agent.experience)}`}>
                       {agent.experience.charAt(0).toUpperCase() + agent.experience.slice(1)}
                     </button>
                   </TableCell>
-                  {/* <TableCell>{agent.tasks}</TableCell> */}
+                  <TableCell>
+                    {agent.skills.split(";").map((skill, index) => (
+                      <div key={index}>{skill.trim()}</div>
+                    ))}
+                  </TableCell>
+
+
+                  <TableCell>{agent.performance}</TableCell>
+                  <TableCell>
+                    <Checkbox checked={agent.available} disabled />
+                  </TableCell>
                   <TableCell>
                     <Button
                       variant="outlined"
                       color="primary"
                       onClick={() => {
-                        const agentId = getAgentIdByEmail(agent.email); // Récupérer l'ID de l'agent via son email
+                        const agentId = getAgentIdByEmail(agent.email);
                         if (agentId) {
-                          navigate(`/agent-details/${agentId}`); // Rediriger vers la page des détails de l'agent
+                          navigate(`/agent-details/${agentId}`);
                         }
                       }}
                     >
                       Show Details
                     </Button>
-
                   </TableCell>
                 </TableRow>
               ))}

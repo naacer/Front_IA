@@ -28,12 +28,12 @@ const Sidebar = () => {
       <div className="sidebar-header">
         <img
           alt={agent.Name}
-          src={agent.Images__c || '/default-avatar.png'}
+          src={agent.image__c || '/default-avatar.png'}
           className="sidebar-avatar"
         />
         <Typography variant="h5" className="sidebar-name">{agent.Name}</Typography>
-        <Typography variant="h6" color="textPrimary">{agent.Email__c}</Typography>
-        <Typography variant="body2" color="textPrimary">{agent.Specialit__c}</Typography>
+        <Typography variant="h6" color="textPrimary">{agent.Email_c__c}</Typography>
+        <Typography variant="body2" color="textPrimary">{agent.Skills__c}</Typography>
       </div>
       <div className="sidebar-buttons">
         <Button

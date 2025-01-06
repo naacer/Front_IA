@@ -32,12 +32,12 @@ const Historique = () => {
         return;
       }
 
-      const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
+      const instanceUrl = "https://nationalschoolofappliedsci3-dev-ed.develop.my.salesforce.com";
       const accessToken =
-        "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
+        "00D8e000000Nlhu!ARMAQL9rVTwCRB1OBVm5fAvBkjh7o1IqcUwW8qTrXL3TNo9uxp9rx.eNppUNe1wVIvJ3qo.3cXzuJpGFt8yddqfWEhUug_.O";
 
       try {
-        const query = `SELECT Id, Object__c, Content__c, Status__c, Agent_dashbord__c FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}' AND Status__c = 'Close'`;
+        const query = `SELECT Id,CaseNumber , Subject, Status, Classification_Score_c__c,Solution_Predicted__c,Agent_Assigned__c FROM Case WHERE Agent_Assigned__c ='${agentId}' AND Status = 'Escalated'`;
 
         const response = await axios.get(
           `${instanceUrl}/services/data/v55.0/query`,
@@ -50,10 +50,11 @@ const Historique = () => {
         );
 
         const transformedEmails = response.data.records.map((email) => ({
-          id: email.Id,
-          object: email.Object__c,
-          content: email.Content__c,
-          status: email.Status__c,
+            id: email.Id,
+            caseNumber: email.CaseNumber,
+            subject: email.Subject,
+            performance: email.Classification_Score_c__c,
+            solution: email.Solution_Predicted__c,
         }));
 
         setEmails(transformedEmails);
@@ -83,17 +84,20 @@ const Historique = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Objet</TableCell>
-              <TableCell>Contenu</TableCell>
-              <TableCell>Statut</TableCell>
+              <TableCell>Case Number</TableCell>
+              <TableCell>Subject</TableCell>
+              <TableCell>Performance</TableCell>
+              <TableCell>Solution</TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
             {emails.map((email) => (
               <TableRow key={email.id}>
-                <TableCell>{email.object}</TableCell>
-                <TableCell>{email.content}</TableCell>
-                <TableCell>{email.status}</TableCell>
+                <TableCell>{email.caseNumber}</TableCell>
+                <TableCell>{email.subject}</TableCell>
+                <TableCell>{email.performance}</TableCell>
+                <TableCell>{email.solution}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -26,7 +26,7 @@ const EmailList = () => {
   const [newStatus, setNewStatus] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const statusOptions = ["In Progress", "Next", "Close"]; // Options de statut disponibles
+  const statusOptions = ["New", "Working", "Escalated"]; // Options de statut disponibles
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -44,12 +44,12 @@ const EmailList = () => {
         return;
       }
 
-      const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
+      const instanceUrl = "https://nationalschoolofappliedsci3-dev-ed.develop.my.salesforce.com";
       const accessToken =
-        "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
+        "00D8e000000Nlhu!ARMAQL9rVTwCRB1OBVm5fAvBkjh7o1IqcUwW8qTrXL3TNo9uxp9rx.eNppUNe1wVIvJ3qo.3cXzuJpGFt8yddqfWEhUug_.O";
 
       try {
-        const query = `SELECT Id, Object__c, Content__c, Status__c, Agent_dashbord__c FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}'`;
+        const query = `SELECT Id,CaseNumber , Subject, Status, Classification_Score_c__c,Solution_Predicted__c,Agent_Assigned__c FROM Case WHERE Agent_Assigned__c ='${agentId}'`;
 
         const response = await axios.get(
           `${instanceUrl}/services/data/v55.0/query`,
@@ -63,9 +63,11 @@ const EmailList = () => {
 
         const transformedEmails = response.data.records.map((email) => ({
           id: email.Id,
-          object: email.Object__c,
-          content: email.Content__c,
-          status: email.Status__c,
+          caseNumber: email.CaseNumber,
+          subject: email.Subject,
+          status: email.Status,
+          performance: email.Classification_Score_c__c,
+          solution: email.Solution_Predicted__c,
         }));
 
         setEmails(transformedEmails);
@@ -98,14 +100,14 @@ const EmailList = () => {
   const updateEmailStatus = async () => {
     if (!selectedEmail || !newStatus) return;
 
-    const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
+    const instanceUrl = "https://nationalschoolofappliedsci3-dev-ed.develop.my.salesforce.com";
     const accessToken =
-      "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
+      "00D8e000000Nlhu!ARMAQL9rVTwCRB1OBVm5fAvBkjh7o1IqcUwW8qTrXL3TNo9uxp9rx.eNppUNe1wVIvJ3qo.3cXzuJpGFt8yddqfWEhUug_.O";
 
     try {
       await axios.patch(
-        `${instanceUrl}/services/data/v55.0/sobjects/Email_db__c/${selectedEmail.id}`,
-        { Status__c: newStatus },
+        `${instanceUrl}/services/data/v55.0/sobjects/Case/${selectedEmail.id}`,
+        { Status: newStatus },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -135,11 +137,11 @@ const EmailList = () => {
 
   const getStatusButtonStyle = (status) => {
     switch (status) {
-      case "Close":
+      case "Escalated":
         return { backgroundColor: "#4CAF50", color: "#fff" }; // Vert
-      case "In Progress":
+      case "Working":
         return { backgroundColor: "#2196F3", color: "#fff" }; // Bleu
-      case "Next":
+      case "New":
         return { backgroundColor: "#F44336", color: "#fff" }; // Rouge
       default:
         return { backgroundColor: "#9E9E9E", color: "#fff" }; // Gris par défaut
@@ -158,17 +160,21 @@ const EmailList = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Objet</TableCell>
-              <TableCell>Contenu</TableCell>
-              <TableCell>Statut</TableCell>
+              <TableCell>CaseNumber</TableCell>
+              <TableCell>Subject</TableCell>
+              <TableCell>Performance</TableCell>
+              <TableCell>Solution</TableCell>                         
+              <TableCell>Statut</TableCell>             
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {emails.map((email) => (
               <TableRow key={email.id}>
-                <TableCell>{email.object}</TableCell>
-                <TableCell>{email.content}</TableCell>
+                <TableCell>{email.caseNumber}</TableCell>
+                <TableCell>{email.subject}</TableCell>
+                <TableCell>{email.performance}</TableCell>
+                <TableCell>{email.solution}</TableCell>
                 <TableCell>
                   <Button
                     style={{

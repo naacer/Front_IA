@@ -10,7 +10,7 @@ const AgentLogin = () => {
 
   const handleAgentLogin = async (credentials) => {
     try {
-      const agent = await login(credentials, "Agent_dashbord__c");
+      const agent = await login(credentials, "Agent_c__c");
       console.log('Agent logged in:', agent);
 
       // Stockez les informations du superviseur dans le stockage local

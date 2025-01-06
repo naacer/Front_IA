@@ -9,7 +9,7 @@ const SupervisorLogin = () => {
 
   const handleSupervisorLogin = async (credentials) => {
     try {
-      const supervisor = await login(credentials, "supervisor_db__c");
+      const supervisor = await login(credentials, "Supervisor__c");
       console.log('Supervisor logged in:', supervisor);
 
       // Stockez les informations du superviseur dans le stockage local

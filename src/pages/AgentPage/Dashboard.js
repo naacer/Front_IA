@@ -27,9 +27,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchEmailData = async () => {
       setLoading(true);
-      const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
+      const instanceUrl = "https://nationalschoolofappliedsci3-dev-ed.develop.my.salesforce.com";
       const accessToken =
-        "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
+        "00D8e000000Nlhu!ARMAQL9rVTwCRB1OBVm5fAvBkjh7o1IqcUwW8qTrXL3TNo9uxp9rx.eNppUNe1wVIvJ3qo.3cXzuJpGFt8yddqfWEhUug_.O";
 
       const agentData = localStorage.getItem("Agent");
       if (!agentData) {
@@ -47,7 +47,7 @@ const Dashboard = () => {
 
       try {
         // Query for all emails assigned to the agent
-        const assignedEmailsQuery = `SELECT COUNT(Id) FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}'`;
+        const assignedEmailsQuery = `SELECT COUNT(Id) FROM Case WHERE Agent_Assigned__c = '${agentId}'`;
         const assignedEmailsResponse = await axios.get(
           `${instanceUrl}/services/data/v55.0/query`,
           {
@@ -59,7 +59,7 @@ const Dashboard = () => {
         );
 
         // Query for emails with "Close" status assigned to the agent
-        const closedEmailsQuery = `SELECT COUNT(Id) FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}' AND Status__c = 'Close'`;
+        const closedEmailsQuery = `SELECT COUNT(Id) FROM Case WHERE Agent_Assigned__c = '${agentId}' AND Status = 'Escalated'`;
         const closedEmailsResponse = await axios.get(
           `${instanceUrl}/services/data/v55.0/query`,
           {
@@ -71,7 +71,7 @@ const Dashboard = () => {
         );
 
         // Query for status distribution
-        const statusDistributionQuery = `SELECT Status__c, COUNT(Id) FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}' GROUP BY Status__c`;
+        const statusDistributionQuery = `SELECT Status, COUNT(Id) FROM Case WHERE Agent_Assigned__c = '${agentId}' GROUP BY Status`;
         const statusDistributionResponse = await axios.get(
           `${instanceUrl}/services/data/v55.0/query`,
           {
@@ -84,7 +84,7 @@ const Dashboard = () => {
 
         // Transform the distribution data
         const distributionData = statusDistributionResponse.data.records.map((record) => ({
-          name: record.Status__c,
+          name: record.Status,
           value: record.expr0,
         }));
 

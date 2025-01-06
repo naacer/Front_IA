@@ -9,6 +9,7 @@
     width: 95%;
     margin-left: 30px;
     margin-top: -10px;
+    text-align: center;
 }
 .agent-header {
     display: flex;
