@@ -46,7 +46,7 @@ const EmailList = () => {
 
       const instanceUrl = "https://nacer-dev-ed.develop.my.salesforce.com";
       const accessToken =
-        "00Dd2000005q8pp!AQEAQDRTw3dG5.OLEDQjrWrKTvR2o_newvlHxAyZjP5lpC5CGEpD69WjCFjP7NLuZuOg5UCQJiMg7A1l6uChgTRZrMT4FBXi";
+        "00Dd2000005q8pp!AQEAQHxIPaUJ3jRhIWRUTSp4Ua0bDwfOyytLF9hR0IDWzzhMcEEdpAgJs3pv57XHZXrQbf6hfpZhKC7MF.S4n9jPIy_rtQt5";
 
       try {
         const query = `SELECT Id, Object__c, Content__c, Status__c, Agent_dashbord__c FROM Email_db__c WHERE Agent_dashbord__c = '${agentId}'`;
