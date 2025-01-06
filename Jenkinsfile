@@ -16,7 +16,7 @@ pipeline {
                         
                         # Déployer le service via Render CLI
                         echo "Deploying to Render..."
-                        render deploy --api-key $RENDER_API_KEY --service app_management
+                        render deploy --api-key $RENDER_API_KEY --service srv-cttffghu0jms73bic4h0
                         '''
                     }
                 }
